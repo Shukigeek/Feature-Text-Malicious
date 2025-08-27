@@ -18,6 +18,14 @@ class Preprocessor:
         text = " ".join(tokens)
 
         return text
+if __name__ == '__main__':
+    import nltk
+
+    nltk.download('stopwords')
+    nltk.download('punkt')
+    nltk.download('wordnet')
+    p = Preprocessor()
+    print(p.clean_text("nkjhfdtfyguk987t565__-----,,..k; i  i and by petahia"))
 
 
 

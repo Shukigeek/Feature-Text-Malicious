@@ -2,9 +2,9 @@ from kafka import KafkaConsumer
 import json
 
 class Subscriber:
-    def __init__(self):
+    def __init__(self,topic):
         self.consumer = KafkaConsumer(
-            'raw_tweets',
+            topic,
             bootstrap_servers=['kafka:9092'],
             auto_offset_reset='earliest',
             enable_auto_commit=True,
