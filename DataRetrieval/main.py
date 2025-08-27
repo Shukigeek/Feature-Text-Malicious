@@ -1,8 +1,8 @@
 from manager import Manager
 import time
-
+m = Manager()
 while True:
-    Manager().manage()
+    m.manage()
     time.sleep(60)
 
 
