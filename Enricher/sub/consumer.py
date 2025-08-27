@@ -9,10 +9,8 @@ class Consumer:
             group_id= "my-group",
             value_deserializer=lambda m: json.loads(m.decode('utf-8')),
             bootstrap_servers=[kafka_broker],
-            consumer_timeout_ms=10000,
             auto_offset_reset='earliest'
         )
-
     def get_all_messages(self):
         messages = []
         for message in self.consumer:
