@@ -29,8 +29,10 @@ class FetchData:
         if self.conn:
             db = self.conn[f"{self.DB_name}"]
             collection = db[f"{self.collection}"]
+            hundred = self.hundred
+            self.hundred += 100
             return (collection.find({},{"TweetID":1,"CreateDate":1,"Antisemitic":1,"text":1,"_id":0})
-                    .sort("CreateDate",1).skip(self.hundred).limit(100).to_list())
+                    .sort("CreateDate",1).skip(hundred).limit(100).to_list())
         else:
             return "connection did not created"
 if __name__ == '__main__':

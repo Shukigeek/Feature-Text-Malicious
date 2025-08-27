@@ -2,11 +2,11 @@ from kafka import KafkaProducer
 from kafka.errors import NoBrokersAvailable
 import json
 import time
-import os
+
 
 class Producer:
     def __init__(self):
-        kafka_broker = os.getenv("KAFKA_BROKER")
+        kafka_broker = "localhost:9092"
         while True:
             try:
                 self.producer = KafkaProducer(
@@ -22,5 +22,9 @@ class Producer:
     def publish_message(self, topic, message):
         self.producer.send(topic, message)
         self.producer.flush()
+
+if __name__ == '__main__':
+    p = Producer()
+    p.publish_message("1",{'oooo':"m"})
 
 
