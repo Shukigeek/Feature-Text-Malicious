@@ -9,6 +9,7 @@ class Process:
                 self.raw_tweets_antisemitic.append(doc)
             else:
                 self.raw_tweets_not_antisemitic.append(doc)
+
         return {"antisemitic":self.raw_tweets_antisemitic,
             "not_antisemitic":self.raw_tweets_not_antisemitic}
 if __name__ == '__main__':

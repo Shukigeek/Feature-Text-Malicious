@@ -6,7 +6,6 @@ class Manager:
     def __init__(self):
         self.antisemitic = None
         self.not_antisemitic = None
-        self.manage()
     def fetch_process(self):
         tweets = FetchData().fetch()
         div_tweet = Process().divide_tweets(tweets)
@@ -14,8 +13,11 @@ class Manager:
         self.not_antisemitic = div_tweet["not_antisemitic"]
     def publish_tweets(self):
         pro = Producer()
-        pro.publish_message("raw_tweets_antisemitic",self.antisemitic)
-        pro.publish_message("raw_tweets_not_antisemitic",self.not_antisemitic)
+        for doc in self.antisemitic:
+            pro.publish_message("raw_tweets_antisemitic",str(doc))
+
+        for doc in self.not_antisemitic:
+            pro.publish_message("raw_tweets_not_antisemitic",str(doc))
     def manage(self):
         self.fetch_process()
         self.publish_tweets()
