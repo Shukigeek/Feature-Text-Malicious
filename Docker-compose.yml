@@ -45,6 +45,20 @@ services:
     networks:
       - feature_text_malicious_default
 
+
+  enricher:
+    build:
+      context: Enricher
+      dockerfile: Dockerfile
+    environment:
+      - KAFKA_BROKER=kafka:9092
+    ports:
+      - "8001:8001"
+    depends_on:
+      - kafka
+    networks:
+      - feature_text_malicious_default
+
   kafdrop:
     image: obsidiandynamics/kafdrop
     container_name: kafdrop
