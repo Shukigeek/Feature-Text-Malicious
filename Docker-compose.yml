@@ -28,6 +28,28 @@ services:
     networks:
       - feature_text_malicious_default
 
+
+  kafdrop:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop
+    ports:
+      - "9000:9000"
+    environment:
+      - KAFKA_BROKERCONNECT=kafka:9092
+    depends_on:
+      - kafka
+    networks:
+      - feature_text_malicious_default
+
+
+  mongodb:
+    image: mongo:6.0
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
   data_retrieval:
     build:
       context: DataRetrieval
@@ -59,20 +81,31 @@ services:
     networks:
       - feature_text_malicious_default
 
-  kafdrop:
-    image: obsidiandynamics/kafdrop
-    container_name: kafdrop
-    ports:
-      - "9000:9000"
+
+  persister:
+    build:
+      context: Persister
+      dockerfile: Dockerfile
     environment:
-      - KAFKA_BROKERCONNECT=kafka:9092
+      - KAFKA_BROKER=kafka:9092
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=processed_tweets
+    ports:
+      - "8002:8002"
     depends_on:
       - kafka
+      - mongodb
     networks:
       - feature_text_malicious_default
 
+
+
+
+
+
 volumes:
-  mongo-data:
+  mongo_data:
 
 networks:
   feature_text_malicious_default:
