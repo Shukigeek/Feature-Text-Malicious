@@ -13,13 +13,13 @@ services:
       - feature_text_malicious_default
 
   kafka:
-    image: 'bitnami/kafka:3.7'
+    image: 'wurstmeister/kafka:latest'
     container_name: kafka
     ports:
       - '9092:9092'
     environment:
       - KAFKA_BROKER_ID=1
-      - KAFKA_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
       - ALLOW_PLAINTEXT_LISTENER=yes
@@ -42,17 +42,17 @@ services:
       - feature_text_malicious_default
 
 
-  mongodb:
-    image: mongo:6.0
-    container_name: mongodb
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo_data:/data/db
+#  mongodb:
+#    image: mongo:6.0
+#    container_name: mongodb
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - mongo_data:/data/db
 
-  data_retrieval:
+  fetch_tweets_atlas:
     build:
-      context: DataRetrieval
+      context: fetch_tweets_atlas
       dockerfile: Dockerfile
     environment:
       - KAFKA_BROKER=kafka:9092
@@ -68,9 +68,10 @@ services:
       - feature_text_malicious_default
 
 
-  enricher:
+
+  preprocess:
     build:
-      context: Enricher
+      context: preprocessed_tweets
       dockerfile: Dockerfile
     environment:
       - KAFKA_BROKER=kafka:9092
@@ -81,23 +82,36 @@ services:
     networks:
       - feature_text_malicious_default
 
+#  enricher:
+#    build:
+#      context: Enricher
+#      dockerfile: Dockerfile
+#    environment:
+#      - KAFKA_BROKER=kafka:9092
+#    ports:
+#      - "8002:8002"
+#    depends_on:
+#      - kafka
+#    networks:
+#      - feature_text_malicious_default
 
-  persister:
-    build:
-      context: Persister
-      dockerfile: Dockerfile
-    environment:
-      - KAFKA_BROKER=kafka:9092
-      - MONGO_HOST=mongodb
-      - MONGO_PORT=27017
-      - MONGO_DB=processed_tweets
-    ports:
-      - "8002:8002"
-    depends_on:
-      - kafka
-      - mongodb
-    networks:
-      - feature_text_malicious_default
+
+#  persister:
+#    build:
+#      context: Persister
+#      dockerfile: Dockerfile
+#    environment:
+#      - KAFKA_BROKER=kafka:9092
+#      - MONGO_HOST=mongodb
+#      - MONGO_PORT=27017
+#      - MONGO_DB=processed_tweets
+#    ports:
+#      - "8003:8003"
+#    depends_on:
+#      - kafka
+#      - mongodb
+#    networks:
+#      - feature_text_malicious_default
 
 
 

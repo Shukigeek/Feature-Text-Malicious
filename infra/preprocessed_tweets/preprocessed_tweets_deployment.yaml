@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: preprocessed_tweets
+  labels:
+    app: preprocessed_tweets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: preprocessed_tweets
+  template:
+    metadata:
+      labels:
+        app: preprocessed_tweets
+    spec:
+      containers:
+        - name: preprocessed_tweets
+          image: shuki120/feature_text_malicious-preprocess:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8001
+          envFrom:
+            - secretRef:
+                name: preprocessed_tweets-secret
+

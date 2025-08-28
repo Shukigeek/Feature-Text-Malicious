@@ -1,3 +1,5 @@
+import json
+
 from fetch_tweets import FetchData
 from process_tweet import Process
 from producer import Producer
@@ -14,10 +16,10 @@ class Manager:
     def publish_tweets(self):
         pro = Producer()
         for doc in self.antisemitic:
-            pro.publish_message("raw_tweets_antisemitic",str(doc))
+            pro.publish_message("raw_tweets_antisemitic",json.dumps(doc, default=str))
 
         for doc in self.not_antisemitic:
-            pro.publish_message("raw_tweets_not_antisemitic",str(doc))
+            pro.publish_message("raw_tweets_not_antisemitic",json.dumps(doc, default=str))
     def manage(self):
         self.fetch_process()
         self.publish_tweets()

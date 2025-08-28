@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enricher
+  labels:
+    app: enricher
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enricher
+  template:
+    metadata:
+      labels:
+        app: enricher
+    spec:
+      containers:
+        - name: enricher
+          image: shuki120/hostile-tweets:v2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8002
+          envFrom:
+            - secretRef:
+                name: enricher-secret
+

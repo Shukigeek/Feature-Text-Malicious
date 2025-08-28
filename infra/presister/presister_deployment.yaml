@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: presister
+  labels:
+    app: presister
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: presister
+  template:
+    metadata:
+      labels:
+        app: presister
+    spec:
+      containers:
+        - name: presister
+          image: shuki120/hostile-tweets:v2
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8003
+          envFrom:
+            - secretRef:
+                name: presister-secret
+
