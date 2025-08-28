@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from local_mongo import DataRetrieval
+from local_mongo import MongoTweetReader
 
 app = FastAPI()
-service = DataRetrieval()
+service = MongoTweetReader()
 
 
 

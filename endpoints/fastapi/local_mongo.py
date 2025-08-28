@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-class DataRetrieval:
+class MongoTweetReader:
     def __init__(self):
         # שוקי אפשר להוסיף משתנה סביבה של הקונקשיין סטרינג
         self.mongo_url = "mongodb://localhost:27017/"
