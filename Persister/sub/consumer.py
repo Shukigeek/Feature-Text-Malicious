@@ -2,11 +2,11 @@ from kafka import KafkaConsumer
 import json
 import os
 class Consumer:
-    def __init__(self, topic):
+    def __init__(self, topic1,topic2):
         kafka_broker = os.getenv("KAFKA_BROKER", "kafka:9092")
         self.consumer = KafkaConsumer(
-            topic,
-            group_id= "my-group",
+            topic1,topic2,
+            group_id= "enriched_data",
             value_deserializer=lambda m: json.loads(m.decode('utf-8')),
             bootstrap_servers=[kafka_broker],
             auto_offset_reset='earliest'

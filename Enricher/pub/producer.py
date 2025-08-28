@@ -6,8 +6,7 @@ import os
 
 class Producer:
     def __init__(self):
-        kafka_broker = os.getenv("KAFKA_BROKER","kafka:9092")
-        # kafka_broker = "localhost:9092"
+        kafka_broker = os.getenv("KAFKA_BROKER","127.0.0.1:9092")
         while True:
             try:
                 self.producer = KafkaProducer(
