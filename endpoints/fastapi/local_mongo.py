@@ -3,8 +3,8 @@ from pymongo import MongoClient
 class DataRetrieval:
     def __init__(self):
         # שוקי אפשר להוסיף משתנה סביבה של הקונקשיין סטרינג
-        mongo_url = "mongodb://localhost:27017/"
-        self.client = MongoClient(mongo_url)
+        self.mongo_url = "mongodb://localhost:27017/"
+        self.client = MongoClient(self.mongo_url)
         self.db = self.client["IranMalDB"]
 
     def get_antisemitic(self):
