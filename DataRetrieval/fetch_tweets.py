@@ -1,9 +1,5 @@
 import os
 import time
-
-from dotenv import load_dotenv, dotenv_values
-load_dotenv()
-
 from pymongo import MongoClient ,errors
 
 class FetchData:
