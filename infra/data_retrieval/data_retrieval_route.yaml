@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: data_retrieval
+  annotations:
+    haproxy.router.openshift.io/timeout: 600s
+spec:
+  to:
+    kind: Service
+    name: data_retrieval
+  port:
+    targetPort: 8004
+  tls:
+    termination: edge

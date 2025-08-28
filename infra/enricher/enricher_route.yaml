@@ -1,0 +1,14 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: enricher
+  annotations:
+    haproxy.router.openshift.io/timeout: 600s
+spec:
+  to:
+    kind: Service
+    name: enricher
+  port:
+    targetPort: 8002
+  tls:
+    termination: edge
