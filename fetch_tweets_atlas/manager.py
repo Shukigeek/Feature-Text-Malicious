@@ -16,10 +16,12 @@ class Manager:
     def publish_tweets(self):
         pro = Producer()
         for doc in self.antisemitic:
-            pro.publish_message("raw_tweets_antisemitic",json.dumps(doc, default=str))
+            doc["CreateDate"] = doc["CreateDate"].isoformat()
+            pro.publish_message("raw_tweets_antisemitic",doc)
 
         for doc in self.not_antisemitic:
-            pro.publish_message("raw_tweets_not_antisemitic",json.dumps(doc, default=str))
+            doc["CreateDate"] = doc["CreateDate"].isoformat()
+            pro.publish_message("raw_tweets_not_antisemitic",doc)
     def manage(self):
         self.fetch_process()
         self.publish_tweets()

@@ -2,7 +2,7 @@ import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 nltk.data.find("sentiment/vader_lexicon.zip")
 import re
-from clean_data.process_data import Preprocessor
+from process.clean_data import Preprocessor
 
 
 class Processor:

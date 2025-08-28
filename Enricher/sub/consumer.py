@@ -3,7 +3,7 @@ import json
 import os
 class Consumer:
     def __init__(self, topic1,topic2):
-        kafka_broker = os.getenv("KAFKA_BROKER", "kafka:9092")
+        kafka_broker = os.getenv("KAFKA_BROKER", "127.0.0.1:9092")
         self.consumer = KafkaConsumer(
             topic1,topic2,
             group_id= "preprocess",

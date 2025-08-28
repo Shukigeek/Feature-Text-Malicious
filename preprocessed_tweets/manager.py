@@ -43,6 +43,7 @@ class Manager:
                 self.antisemitic = event.value
                 self.process(self.antisemitic)
                 self.publish("preprocessed_tweets_antisemitic", self.antisemitic)
+
             elif event.topic == "raw_tweets_not_antisemitic":
                 self.non_antisemitic = event.value
                 self.process(self.non_antisemitic)
