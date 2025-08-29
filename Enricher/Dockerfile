@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 
-COPY requirements.txt .
+COPY Enricher/requirements.txt .
 
 RUN python -m pip install --upgrade pip && \
     python -m pip install --no-cache-dir -r requirements.txt
@@ -21,6 +21,7 @@ RUN python -m nltk.downloader -d /usr/local/share/nltk_data vader_lexicon punkt 
 
 
 COPY . .
+COPY utiles /app/utiles
 
 
 RUN useradd -m appuser

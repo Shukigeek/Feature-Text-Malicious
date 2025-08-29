@@ -1,5 +1,5 @@
 from mongo.mongo_dal import Connection
-from sub.consumer import Consumer
+from utiles.sub.consumer import Consumer
 import logging
 class ManagerError(Exception):
     pass

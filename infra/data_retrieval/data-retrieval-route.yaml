@@ -1,14 +1,14 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: preprocessed_tweets
+  name: data-retrieval
   annotations:
     haproxy.router.openshift.io/timeout: 600s
 spec:
   to:
     kind: Service
-    name: preprocessed_tweets
+    name: data-retrieval
   port:
-    targetPort: 8001
+    targetPort: 8004
   tls:
     termination: edge

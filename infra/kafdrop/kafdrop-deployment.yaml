@@ -18,5 +18,5 @@ spec:
           ports:
             - containerPort: 9000
           env:
-            - name: KAFKA_BROKERCONNECT
+            - name: KAFKA-BROKERCONNECT
               value: "kafka-service:9092"

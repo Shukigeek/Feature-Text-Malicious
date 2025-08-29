@@ -55,8 +55,12 @@ services:
 
   fetch_tweets_atlas:
     build:
-      context: fetch_tweets_atlas
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: fetch_tweets_atlas/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./fetch_tweets_atlas:/app
+      - ./utiles:/app/utiles
     environment:
       - KAFKA_BROKER=kafka:9092
       - MONGO_USER=IRGC_NEW
@@ -74,8 +78,12 @@ services:
 
   preprocess:
     build:
-      context: preprocessed_tweets
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: preprocessed_tweets/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./preprocessed_tweets:/app
+      - ./utiles:/app/utiles
     environment:
       - KAFKA_BROKER=kafka:9092
     ports:
@@ -87,8 +95,12 @@ services:
 
   enricher:
     build:
-      context: Enricher
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Enricher/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./Enricher:/app
+      - ./utiles:/app/utiles
     environment:
       - KAFKA_BROKER=kafka:9092
     ports:
@@ -101,8 +113,12 @@ services:
 
   persister:
     build:
-      context: Persister
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: Persister/Dockerfile
+    working_dir: /app
+    volumes:
+      - ./Persister:/app
+      - ./utiles:/app/utiles
     environment:
       - KAFKA_BROKER=kafka:9092
       - MONGO_HOST=mongodb

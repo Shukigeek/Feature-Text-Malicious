@@ -1,6 +1,6 @@
-from sub.consumer import Consumer
+from utiles.sub.consumer import Consumer
 from process.process_tweets import Processor
-from pub.producer import Producer
+from utiles.pub.producer import Producer
 import sys
 import logging
 class ManagerError(Exception):

@@ -1,6 +1,6 @@
-from sub.consumer_raw_data import Consumer
+from utiles.sub.consumer import Consumer
 from clean_data.process_data import Preprocessor
-from pub.publish_processed_data import Producer
+from utiles.pub.producer import Producer
 
 class ManagerError(Exception):
     pass

@@ -1,26 +1,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: presister
+  name: data-retrieval
   labels:
-    app: presister
+    app: data-retrieval
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: presister
+      app: data-retrieval
   template:
     metadata:
       labels:
-        app: presister
+        app: data-retrieval
     spec:
       containers:
-        - name: presister
-          image: shuki120/hostile-tweets:v2
+        - name: data-retrieval
+          image: shuki120/data-retrieval:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8003
+            - containerPort: 8004
           envFrom:
             - secretRef:
-                name: presister-secret
+                name: data-retrieval-secret
 

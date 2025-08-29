@@ -2,7 +2,7 @@ import json
 
 from fetch_tweets import FetchData
 from process_tweet import Process
-from producer import Producer
+from utiles.pub.producer import Producer
 
 class Manager:
     def __init__(self):
