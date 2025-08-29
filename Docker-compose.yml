@@ -49,6 +49,9 @@ services:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
+    networks:
+      - feature_text_malicious_default
+
 
   fetch_tweets_atlas:
     build:
@@ -114,7 +117,20 @@ services:
       - feature_text_malicious_default
 
 
-
+  data_retrieval:
+    build:
+      context: Data_retrieval
+      dockerfile: Dockerfile
+    environment:
+      - MONGO_HOST=mongodb
+      - MONGO_PORT=27017
+      - MONGO_DB=processed_tweets
+    ports:
+      - "8004:8004"
+    depends_on:
+      - mongodb
+    networks:
+      - feature_text_malicious_default
 
 
 

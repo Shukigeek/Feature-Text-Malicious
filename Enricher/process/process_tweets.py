@@ -21,18 +21,18 @@ class Processor:
 
     def weapon_detected(self):
         p = Preprocessor()
-        with open(r"../data/weapon.txt","r") as f:
+        with open(r"data/weapon.txt","r") as f:
             weapon_list = [p.clean_text(weapon) for weapon in f.readlines()]
         weapon_in = list()
         for weapon in weapon_list:
             if weapon in self.doc["clean_text"]:
                 weapon_in.append(weapon)
-        self.doc["weapons_detected"] = weapon_in or '""'
+        self.doc["weapons_detected"] = weapon_in or ""
         return self
 
     def find_time(self):
         date_pattern = r"\d{4}-\d{2}-\d{2}"
-        max_date = '""'
+        max_date = ""
         for word in self.doc["original_text"].split():
             if re.fullmatch(date_pattern, word):
                 max_date = max(max_date,word)

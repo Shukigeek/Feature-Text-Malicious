@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from local_mongo import MongoTweetReader
+from api_mongo.local_mongo import MongoTweetReader
 
 app = FastAPI()
 service = MongoTweetReader()
