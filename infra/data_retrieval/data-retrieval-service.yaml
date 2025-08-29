@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: data-retrieval
+spec:
+  type: LoadBalancer
+  selector:
+    app: data-retrieval
+  ports:
+    - protocol: TCP
+      port: 8004
+      targetPort: 8004
+
+
+

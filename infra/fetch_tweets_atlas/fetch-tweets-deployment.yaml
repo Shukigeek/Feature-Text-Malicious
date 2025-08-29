@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fetch-tweets
+  labels:
+    app: fetch-tweets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fetch-tweets
+  template:
+    metadata:
+      labels:
+        app: fetch-tweets
+    spec:
+      containers:
+        - name: fetch-tweets
+          image: shuki120/fetch-tweets-atlas:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - secretRef:
+                name: fetch-tweets-secret
+

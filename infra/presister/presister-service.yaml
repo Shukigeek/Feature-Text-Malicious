@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: presister
+spec:
+  type: LoadBalancer
+  selector:
+    app: presister
+  ports:
+    - protocol: TCP
+      port: 8003
+      targetPort: 8003
